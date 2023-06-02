@@ -1,0 +1,193 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pexels - Clone</title>
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="src/css/style.css" />
+
+    <!-- remixicons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero__content">
+        <h1 class="hero__text">
+          The best free stock photos, royalty free <br />
+          images & videos shared by creators.
+        </h1>
+
+        <div class="search__form">
+          <div class="search__type">
+            <ul class="default__search">
+              <li>
+                <i class="ri-image-line"></i>
+                <span>Photos</span>
+                <i class="ri-arrow-down-s-line show-btn active"></i>
+              </li>
+            </ul>
+
+            <div class="search__list">
+              <li class="selected">
+                <i class="ri-image-line"></i>
+                <span>Photos</span>
+              </li>
+              <li>
+                <i class="ri-video-line"></i>
+                <span>Videos</span>
+              </li>
+            </div>
+          </div>
+          <input
+            type="text"
+            placeholder="Search for free photos"
+            class="input__search"
+          />
+          <i class="ri-search-line flip search-btn"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="images__section">
+      <div class="title">Free Stock Photos</div>
+
+      <ul class="images">
+        <!-- <li class="image__holder">
+          <img src="src/images/1.webp" alt="" />
+
+          <div class="image__details">
+            <div class="photographer">
+              <div class="photographer__info">
+                <i class="ri-user-line"></i>
+                <span>John Doe</span>
+              </div>
+              <div class="btns">
+                <button>
+                  <i class="ri-download-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="image__holder">
+          <img src="src/images/hero.webp" alt="" />
+
+          <div class="image__details">
+            <div class="photographer">
+              <div class="photographer__info">
+                <i class="ri-user-line"></i>
+                <span>John Doe</span>
+              </div>
+              <div class="btns">
+                <button>
+                  <i class="ri-download-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </li> -->
+      </ul>
+      <!-- load more -->
+      <div class="load__btn">
+        <button class="load-more-btn">Load More</button>
+      </div>
+    </section>
+
+    <!-- image popup -->
+    <div class="image__popup">
+      <div class="container">
+        <div class="close__popup">
+          <i class="ri-close-line"></i>
+        </div>
+        <div class="image__popup__header">
+          <div class="photographer">
+            <div class="photographer__name">
+              <i class="ri-user-line"></i>
+              <span>John Doe</span>
+            </div>
+
+            <div class="buttons">
+              <button class="download-btn">
+                <span>Free download</span>
+                <i class="ri-arrow-down-s-line"></i>
+              </button>
+              <div class="download__form">
+                <div class="mini__title">Choose a size:</div>
+                <ul class="download__list">
+                  <li class="selected">
+                    <span class="image__size__name"
+                      >Original <span class="image__size">3333x500</span></span
+                    >
+                    <i class="ri-check-line"></i>
+                  </li>
+                  <li>
+                    <span class="image__size__name"
+                      >Large <span class="image__size">3333x500</span></span
+                    >
+                    <i class="ri-check-line"></i>
+                  </li>
+                  <li>
+                    <span class="image__size__name"
+                      >Medium <span class="image__size">3333x500</span></span
+                    >
+                    <i class="ri-check-line"></i>
+                  </li>
+                  <li>
+                    <span class="image__size__name"
+                      >Small <span class="image__size">3333x500</span></span
+                    >
+                    <i class="ri-check-line"></i>
+                  </li>
+
+                  <div class="bottom__section">
+                    <button class="download-selected-btn">
+                      Download Selected Size
+                    </button>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview__image">
+          <div class="image">
+            <img src="" alt="preview image" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="lightbox">
+      <div class="wrapper">
+        <header>
+          <div class="photographer">
+            <i class="uil uil-camera"></i>
+            <span></span>
+          </div>
+          <div class="buttons">
+            <i class="ri-download-line"></i>
+            <i class="close-icon ri-close-line"></i>
+          </div>
+        </header>
+        <div class="preview-img">
+          <div class="img"><img src="" alt="preview-img" /></div>
+        </div>
+      </div>
+    </div> -->
+    <script src="src/js/main.js"></script>
+  </body>
+</html>
