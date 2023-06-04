@@ -62,8 +62,30 @@
     </section>
 
     <section class="images__section">
-      <div class="title">Free Stock Photos</div>
+      <div class="header__area">
+        <div class="title">Free Stock Photos</div>
+        <div class="filter__btn"><i class="ri-filter-3-line"></i>Filters</div>
+      </div>
 
+      <div class="filter__area">
+        <div class="filter__items">
+          <div class="filter__item">
+            <select name="filterOrient" id="filterOrient">
+              <option value="all" selected>All Orientations</option>
+              <option value="landscape">Horizontal</option>
+              <option value="portrait">Vertical</option>
+            </select>
+          </div>
+          <div class="filter__item">
+            <select name="filterSize" id="filterSize">
+              <option value="all" selected>All Sizes</option>
+              <option value="large">Large</option>
+              <option value="medium">Medium</option>
+              <option value="small">Small</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <ul class="images">
         <!-- <li class="image__holder">
           <img src="src/images/1.webp" alt="" />

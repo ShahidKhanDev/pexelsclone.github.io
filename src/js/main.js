@@ -1,7 +1,9 @@
 // DOM Elements
+const heroBg = document.querySelector(".hero");
 const searchList = document.querySelector(".search__list");
 const defaultSearch = document.querySelector(".default__search");
 const showSearchListBtn = document.querySelector(".show-btn");
+const imagesElem = document.querySelector(".images");
 const downloadImagebtn = document.querySelector(".download-btn");
 const imagePopup = document.querySelector(".image__popup");
 const closeImagePopupBtn = document.querySelector(".close__popup");
@@ -10,11 +12,18 @@ let photographerName = imagePopup.querySelector(".photographer__name span");
 const downloadForm = document.querySelector(".image__popup .download__form");
 const showDownloadListBtn = document.querySelector(".download-btn i");
 const loadMoreBtn = document.querySelector(".load-more-btn");
+const filterBtn = document.querySelector(".filter__btn");
+const filterArea = document.querySelector(".filter__area");
+const filterSelectElem = document.querySelectorAll(".filter__item select");
+const filterSelectOptions = document.querySelectorAll(".filter__item option");
+const searchInput = document.querySelector(".input__search");
 
 const apiKey = "pEUzmmnGt9nd2Teix7WPZaW3Qr6uDefhygFBxWVNAcy68eWbA3MEOXa8";
 let perPage = 15;
 let currentPage = 1;
-const imagesElem = document.querySelector(".images");
+let searchTerm = null;
+let imageOrient = null;
+let imageSize = null;
 
 showSearchListBtn.addEventListener("mouseenter", () => {
   searchList.style.display = "block";
@@ -32,7 +41,6 @@ searchList.addEventListener("mouseleave", () => {
   );
 });
 
-// open image popup when clicked on image
 function openImagePopup(image, name) {
   imagePopup.classList.add("show");
   previewImage.src = image;
@@ -59,17 +67,28 @@ function showDownloadList() {
   }
 }
 
+// function changeBgImage(images) {
+//   const randomImage = Math.floor(Math.random() * images.length);
+//   const imageURL = images[randomImage].src.landscape;
+//   heroBg.style.background = `url(${imageURL})`;
+//   heroBg.style.backgroundRepeat = "no-repeat";
+//   heroBg.style.backgroundSize = "cover";
+//   heroBg.style.backgroundPosition = "center center";
+//   heroBg.setAttribute("loading", "lazy");
+// }
+
 function loadMoreImages() {
   currentPage++;
+
   let apiUrl = `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`;
+  apiUrl = searchTerm
+    ? `https://api.pexels.com/v1/search?query=${searchTerm}&orientation=${imageOrient}&page=${currentPage}&per_page=${perPage}`
+    : apiUrl;
   getImages(apiUrl);
 }
 
-closeImagePopupBtn.addEventListener("click", closeImagePopup);
-showDownloadListBtn.addEventListener("click", showDownloadList);
-loadMoreBtn.addEventListener("click", loadMoreImages);
-
-const downloadImage = (imageURL) => {
+const downloadImage = (event, imageURL) => {
+  event.stopPropagation();
   fetch(imageURL)
     .then((response) => response.blob())
     .then((blob) => {
@@ -85,12 +104,21 @@ const downloadImage = (imageURL) => {
     });
 };
 
+const filterImages = (filterValue) => {
+  console.log(filterValue);
+  imagesElem.innerHTML = "";
+  imageOrient = filterValue;
+  getImages(
+    `https://api.pexels.com/v1/search?query=${searchTerm}&orientation=${imageOrient}&page=${currentPage}&per_page=${perPage}`
+  );
+};
+
 /**
  * get images from pexels
  */
 
 const generateImages = (images) => {
-  // let len = images.length;
+  // changeBgImage(images);
   imagesElem.innerHTML += images
     .map(
       (
@@ -104,7 +132,7 @@ const generateImages = (images) => {
                     <span>${img.photographer}</span>
                   </div>
                   <div class="btns">
-                    <button onclick="downloadImage('${img.src.large2x}')">
+                    <button onclick="downloadImage(event, '${img.src.large2x}')">
                       <i class="ri-download-line"></i>
                     </button>
                   </div>
@@ -135,9 +163,38 @@ const getImages = (apiURL) => {
     .catch(() => {
       imagesElem.classList.add("error");
       imagesElem.innerHTML = `<div class="error-msg">Oops! Something went wrong! Please try again.</div>`;
+      loadMoreBtn.style.display = "none";
     });
 };
 
 getImages(
   `https://api.pexels.com/v1/curated?page=${currentPage}&per_page=${perPage}`
 );
+
+const searchImages = (e) => {
+  if (e.key === "Enter") {
+    filterBtn.style.display = "block";
+    searchTerm = e.target.value;
+    imagesElem.innerHTML = "";
+    getImages(
+      `https://api.pexels.com/v1/search?query=${searchTerm}&orientation=portrait&page=${currentPage}&per_page=${perPage}`
+    );
+  }
+};
+
+closeImagePopupBtn.addEventListener("click", closeImagePopup);
+showDownloadListBtn.addEventListener("click", showDownloadList);
+loadMoreBtn.addEventListener("click", loadMoreImages);
+filterBtn.addEventListener("click", () => {
+  filterBtn.classList.toggle("active");
+  filterArea.classList.toggle("show");
+});
+searchInput.addEventListener("keyup", searchImages);
+
+filterSelectElem[0].addEventListener("input", () => {
+  const selectedValue = filterSelectElem[0].value;
+
+  filterImages(selectedValue);
+});
+
+// horizontal == landscape , vertical == horizontal
